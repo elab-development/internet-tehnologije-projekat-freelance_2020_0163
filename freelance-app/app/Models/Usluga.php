@@ -18,4 +18,16 @@ class Usluga extends Model
         'cena',
         'vremeRealizacije'
     ];
+
+    public function ponudjaci() {
+        return $this->belongsToMany(Ponudjac::class, 'ponudjac_usluga');
+    }
+
+    public function kategorija() {
+        return $this->belongsTo(KategorijaUsluge::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

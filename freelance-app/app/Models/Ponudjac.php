@@ -19,4 +19,8 @@ class Ponudjac extends Model
         'telefon',
         'godineIskustva',
     ];
+
+    public function usluge() {
+        return $this->belongsToMany(Usluga::class, 'ponudjac_usluga');
+    }
 }
