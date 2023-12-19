@@ -10,8 +10,13 @@ class PonudjacUsluga extends Pivot
     use HasFactory;
 
 
-    protected $table = 'ponudjacUsluga';
+    protected $table = 'PonudjacUsluga';
 
-    
+    protected $fillable = [
+        'status',
+        'ponudjac_id',
+        'usluga_id',
+        
+    ];
 
 }   

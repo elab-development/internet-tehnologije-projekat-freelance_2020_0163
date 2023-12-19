@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PonudjacController;
+use App\Http\Controllers\PonudjacUslugaController;
 use App\Http\Controllers\UslugaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,3 +33,7 @@ Route::put('usluge/{id}', [UslugaController::class, 'update']);
 Route::patch('usluge/azurirajOpis/{id}', [UslugaController::class, 'updateOpis']);
 
 Route::delete('usluge/{id}', [UslugaController::class, 'destroy']); 
+
+Route::get('ponudjacusluga/vratiSveUslugePonudjaca/{id}', [PonudjacUslugaController::class, 'vratiSveUslugePonudjaca']); 
+
+Route::get('ponudjacusluga/vratiSvePonudjaceUsluge/{id}', [PonudjacUslugaController::class, 'vratiSvePonudjaceUsluge']); 

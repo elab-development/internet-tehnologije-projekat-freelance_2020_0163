@@ -21,6 +21,7 @@ class Ponudjac extends Model
     ];
 
     public function usluge() {
-        return $this->belongsToMany(Usluga::class, 'ponudjac_usluga');
+        return $this->belongsToMany(Usluga::class, 'ponudjacUsluga', 'ponudjac_id', 'usluga_id')
+        ->withPivot('status');
     }
 }
