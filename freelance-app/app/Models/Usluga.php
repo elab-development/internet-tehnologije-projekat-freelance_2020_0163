@@ -14,16 +14,17 @@ class Usluga extends Model
     protected $fillable = [
         'naziv',
         'opis',
-        'slika',
         'cena',
-        'vremeRealizacije'
+        'vremeRealizacijeUMesecima',
+        'kategorija_usluge_id',
+        'user_id'
     ];
 
     public function ponudjaci() {
         return $this->belongsToMany(Ponudjac::class, 'ponudjac_usluga');
     }
 
-    public function kategorija() {
+    public function kategorijaUsluge() {
         return $this->belongsTo(KategorijaUsluge::class);
     }
 
