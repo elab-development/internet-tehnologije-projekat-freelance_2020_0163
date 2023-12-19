@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('ponudjac_usluga', function (Blueprint $table) {
+        Schema::table('ponudjacUsluga', function (Blueprint $table) {
             $table->string('status')->default('neaktivan');
         });
     }
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('ponudjac_usluga', function (Blueprint $table) {
+        Schema::table('ponudjacUsluga', function (Blueprint $table) {
             $table->dropColumn('status');
         });
     }

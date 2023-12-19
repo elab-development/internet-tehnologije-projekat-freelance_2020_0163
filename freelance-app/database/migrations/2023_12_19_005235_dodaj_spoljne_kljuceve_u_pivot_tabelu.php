@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('ponudjac_usluga', function (Blueprint $table) {
+        Schema::table('ponudjacUsluga', function (Blueprint $table) {
             $table->foreignId('ponudjac_id')->nullable()->references('id')->on('ponudjaci')->onDelete('cascade');
             $table->foreignId('usluga_id')->nullable()->references('id')->on('usluge')->onDelete('cascade');
          });
@@ -22,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('ponudjac_usluga', function (Blueprint $table) {
+        Schema::table('ponudjacUsluga', function (Blueprint $table) {
             $table->dropForeign('ponudjac_id');
             $table->dropForeign('usluga_id');
          });

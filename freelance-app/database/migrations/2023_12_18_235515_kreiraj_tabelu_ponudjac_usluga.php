@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ponudjac_usluga', function (Blueprint $table) {
+        Schema::create('ponudjacUsluga', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
