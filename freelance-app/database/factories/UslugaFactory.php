@@ -19,9 +19,8 @@ class UslugaFactory extends Factory
     public function definition(): array
     {
         return [
-            'naziv' => $this->faker->name(),
+            'naziv' => $this->faker->word(),
             'opis' => $this->faker->sentence(),
-            'slika' => $this->faker->imageUrl(),
             'cena' => $this->faker->numberBetween($min = 50, $max = 1500),
             'vremeRealizacijeUMesecima' => $this->faker->numberBetween($min = 1, $max = 12),
             'kategorija_usluge_id' => KategorijaUsluge::factory(),

@@ -18,7 +18,6 @@ class UslugaSeeder extends Seeder
         Usluga::create([
             'naziv'=>"Popravka SQL Server gresaka",
             'opis'=>"Popravka gresaka koje nastaju pri projektovanju baza podataka u SQL Serveru.",
-            'slika' => "https://ibb.co/W0JyCZB",
             'cena' => 500,
             'vremeRealizacijeUMesecima' => 1,
             'kategorija_usluge_id' => KategorijaUsluge::findOrFail(1)->id,
@@ -28,7 +27,6 @@ class UslugaSeeder extends Seeder
         Usluga::create([
             'naziv'=>"Casovi programiranja u Javi",
             'opis'=>"Casovi za pocetnike u programsku jeziku Java.",
-            'slika' => "https://ibb.co/HdPD7Qb",
             'cena' => 1200,
             'vremeRealizacijeUMesecima' => 3,
             'kategorija_usluge_id' => KategorijaUsluge::findOrFail(1)->id,

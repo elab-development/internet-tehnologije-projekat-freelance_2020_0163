@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('naziv',30);
             $table->string('opis',100);
-            $table->string('slika',300);
             $table->double('cena');
             $table->integer('vremeRealizacijeUMesecima');
             $table->timestamps();

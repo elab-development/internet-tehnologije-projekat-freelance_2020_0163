@@ -17,7 +17,9 @@ class KategorijaUslugeFactory extends Factory
     public function definition(): array
     {
         return [
-            'naziv' => $this->faker->name(),
+            'naziv' => $this->faker->randomElement($array = 
+            array('Dizajn i kreativnost','Pisanje i prevod','Marketing i oglasavanje', 'Edukacija i obuka',
+            'Video i animacija')),
             'opis' => $this->faker->sentence(),
         ];
     }
