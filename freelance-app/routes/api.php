@@ -6,6 +6,7 @@ use App\Http\Controllers\PretragaController;
 use App\Http\Controllers\UslugaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+
+//login i registracija
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
+
+
+
 Route::resource('ponudjaci', PonudjacController::class);
 
 Route::get('usluge', [UslugaController::class, 'index']);
