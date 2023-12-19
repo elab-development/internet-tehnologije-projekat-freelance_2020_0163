@@ -7,6 +7,10 @@ use App\Models\Ponudjac;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+
+use App\Exports\PonudjacExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class PonudjacController extends Controller
 {
     
@@ -95,4 +99,10 @@ class PonudjacController extends Controller
         $ponudjac->delete();
         return response()->json('Uspešno obrisan ponudjac!');
     }
+
+
+        //export funkcija
+        public function exportToExcel(){
+            return Excel::download(new PonudjacExport, 'ponudjac-excel.xlsx');
+        }
 }

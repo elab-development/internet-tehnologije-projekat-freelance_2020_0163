@@ -41,3 +41,6 @@ Route::get('ponudjacusluga/vratiSvePonudjaceUsluge/{id}', [PonudjacUslugaControl
 
 //pretraga ponudjaca po gradu
 Route::get('/search/ponudjaci', [PretragaController::class, 'searchPonudjaci']);
+
+//export u excel
+Route::get('/export-excel', [PonudjacController::class, 'exportToExcel']);
