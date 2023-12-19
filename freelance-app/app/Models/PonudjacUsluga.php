@@ -10,6 +10,8 @@ class PonudjacUsluga extends Pivot
     use HasFactory;
 
 
-    protected $table = 'ponudjac_usluga';
+    protected $table = 'ponudjacUsluga';
+
+    
 
 }   
