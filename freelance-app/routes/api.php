@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PonudjacController;
 use App\Http\Controllers\PonudjacUslugaController;
+use App\Http\Controllers\PretragaController;
 use App\Http\Controllers\UslugaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,4 +37,7 @@ Route::delete('usluge/{id}', [UslugaController::class, 'destroy']);
 
 Route::get('ponudjacusluga/vratiSveUslugePonudjaca/{id}', [PonudjacUslugaController::class, 'vratiSveUslugePonudjaca']); 
 
-Route::get('ponudjacusluga/vratiSvePonudjaceUsluge/{id}', [PonudjacUslugaController::class, 'vratiSvePonudjaceUsluge']); 
+Route::get('ponudjacusluga/vratiSvePonudjaceUsluge/{id}', [PonudjacUslugaController::class, 'vratiSvePonudjaceUsluge']);
+
+//pretraga ponudjaca po gradu
+Route::get('/search/ponudjaci', [PretragaController::class, 'searchPonudjaci']);
