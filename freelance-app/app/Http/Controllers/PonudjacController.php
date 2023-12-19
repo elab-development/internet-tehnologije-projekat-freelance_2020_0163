@@ -18,8 +18,9 @@ class PonudjacController extends Controller
     }
 
     //ponudjac na osnovu id-a
-    public function show(Ponudjac $ponudjac)
+    public function show($id)
     {
+        $ponudjac = Ponudjac::findOrFail($id);
         return new PonudjacResource($ponudjac);
     }
 
@@ -56,7 +57,7 @@ class PonudjacController extends Controller
     }
 
     //azuriranje ponudjaca
-    public function update(Request $request, Ponudjac $ponudjac)
+    public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'imePrezime' => 'required',
@@ -72,6 +73,8 @@ class PonudjacController extends Controller
             return response()->json($validator->errors());
         }
 
+        $ponudjac = Ponudjac::findOrFail($id);
+
         $ponudjac->imePrezime = $request->imePrezime;
         $ponudjac->grad = $request->grad;
         $ponudjac->adresa = $request->adresa;
@@ -86,8 +89,9 @@ class PonudjacController extends Controller
     }
 
     //brisanje ponudjaca
-    public function destroy(Ponudjac $ponudjac)
+    public function destroy($id)
     {
+        $ponudjac = Ponudjac::findOrFail($id);
         $ponudjac->delete();
         return response()->json('Uspešno obrisan ponudjac!');
     }
