@@ -1,0 +1,34 @@
+.services {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(600px, 1fr)); 
+    gap: 16px;
+    padding: 20px;
+   
+  }
+
+  .servicesStranica{
+    background-image: url('https://wallpapers.com/images/hd/1920x1080-hd-coding-uxxijj0oa4s9xh25.jpg');
+  }
+  
+  .pagination {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    background: transparent;
+  }
+  
+  .pagination button {
+    margin: 0 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #748cdb;
+  }
+  
+  .pagination button.active {
+    background-color: #748cdb;
+    color: #fff;
+    border: 1px solid #748cdb;
+  }

@@ -5,26 +5,23 @@ import React, { useState } from 'react';
 import NavBar from './components/NavBar.jsx';
 import Home from './components/Home.jsx';
 import Services from './components/Services.jsx';
+import About from './components/About.jsx';
+import Profile from './components/Profile.jsx';
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
 
-  //fja za login
   const handleLogin = (username) => {
     setLoggedInUser(username);
   };
 
-  //fja za logout
   const handleLogout = () => {
     setLoggedInUser(null);
     return <Navigate to="/" />;
   };
 
-  //uslov po kom ce se vrsiti pretraga
   const [uslovPretrage,setUslovPretrage]=useState("");
 
-
-  //funkcija koja setuje uslov pretrage
   function pretrazi(uslovPretrage){
     setUslovPretrage(uslovPretrage);
   }
@@ -32,24 +29,34 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      {loggedInUser && <NavBar  pretrazi={pretrazi} loggedInUser={loggedInUser} handleLogout={handleLogout} />}
+        {loggedInUser && <NavBar  pretrazi={pretrazi} loggedInUser={loggedInUser} handleLogout={handleLogout} />}
         <Routes>
           <Route
             path="/"
             element={loggedInUser ? <Navigate to="/home" /> : <LoginForm onLogin={handleLogin} />}
           />
-           <Route 
+          <Route 
             path="/home" 
             element={<Home/>} 
           />
-            <Route 
+          <Route 
             path="/services" 
             element={<Services  kriterijum={uslovPretrage} />} 
           />
 
-          
+          <Route 
+            path="/about" 
+            element={<About/>} 
+          />
+
+          <Route
+            path="/profile"
+            element={loggedInUser ? <Profile loggedInUser={loggedInUser} /> : <Navigate to="/" />}
+          />
+
         </Routes>
       </BrowserRouter>
+    
     </div>
   );
 }
