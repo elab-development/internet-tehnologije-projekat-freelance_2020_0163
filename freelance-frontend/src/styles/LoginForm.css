@@ -1,0 +1,70 @@
+
+.login-form {
+    max-width: 100%;
+    padding: 180px;
+    background-image: url('https://kopyr.ca/wp-content/uploads/2021/08/IT-Services.jpg');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0;
+   
+
+}
+
+.login-form-data {
+    background-color: #243857;
+    text-align: center;
+    max-width: 30%;
+    max-height: 60%;
+    padding: 20px;
+    margin: 110px auto;
+    margin-left: 520px;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 80%;
+    clip-path: polygon(22% 0%, 78% 0%, 100% 50%, 78% 100%, 22% 100%, 0% 50%);
+}
+
+.login-form h2 {
+    margin-bottom: 20px;
+    color: #ffff; 
+}
+
+.login-form label {
+    width: 70%;
+    text-align: left;
+    margin-bottom: 20px;
+    color: #ffff; 
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 70%;
+    margin-bottom: 20px;
+    padding: 8px;
+    border: 1px solid #7990A3; 
+    border-radius: 3px;
+}
+
+.login-form button {
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 30px;
+    border: none;
+    border-radius: 3px;
+    background-color: #6B99C3; 
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+    background-color: #7990A3; 
+}
