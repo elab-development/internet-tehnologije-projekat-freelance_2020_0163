@@ -1,0 +1,71 @@
+.about-container {
+    max-width: 100%;
+    margin: 0 auto;
+    height: 700px;
+    padding: 20px;
+    text-align: center;
+    background-image: url(https://www.computersciencedegreehub.com/wp-content/uploads/2023/02/shutterstock_535124956-scaled.jpg);
+    background-position: center ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.about-content {
+    background-color: #3498db;
+    opacity: 88%;
+    max-width: 66%;
+    max-height: 600px;
+    padding: 20px;
+    display: block;
+    align-items: center;
+    justify-content: center;  
+    border-radius: 15%; 
+}
+
+
+  
+  .about-title {
+    font-size: 32px;
+    color: #fff; 
+    margin-bottom: 20px;
+  }
+  
+  .about-text {
+    font-size: 18px;
+    color: #fff; 
+    margin-bottom: 30px;
+  }
+  
+  .button-container {
+    margin-top: 20px;
+    font-weight: bold;
+    
+  }
+  
+  .about-button, .reset-button {
+    background-color: #7990A3; 
+    color: #fff; 
+    font-size: 16px;
+    padding: 10px 10px;
+    margin-left: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .about-button:hover, .reset-button:hover {
+    background-color: #192D45; 
+  }
+
+  .about-image {
+    width: 450px;
+    height: 280px;
+    border-radius: 16px;
+    margin: 10px;
+  }
