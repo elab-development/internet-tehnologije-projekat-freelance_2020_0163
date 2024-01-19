@@ -35,6 +35,10 @@ function App() {
             path="/"
             element={loggedInUser ? <Navigate to="/home" /> : <LoginForm onLogin={handleLogin} />}
           />
+           <Route 
+            path="/home" 
+            element={<Home/>} 
+          />
 
           
         </Routes>
