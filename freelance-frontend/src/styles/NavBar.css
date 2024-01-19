@@ -1,0 +1,97 @@
+.nav {
+    background: linear-gradient(to left, #243857, #163B88);
+    opacity: 0.8;
+    color: white;
+    position: sticky;
+    margin: auto !important;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+    top: 0;
+  }
+  
+  h1 {
+    margin-left: 20px;
+    font-size: 25px;
+    transition: transform 0.3s ease;
+  }
+
+  h1:hover{
+    transform: scale(1.1);
+    animation: pulse 1s infinite;
+  }
+
+  .nav__item {
+    background: none;
+    display: inline-block;
+    margin: 0px 30px;
+    color: #fff;
+    font-size: 20px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .nav__item--link {
+    background: none;
+    display: inline-block;
+    margin-right: 90px;
+    margin-left: 20px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .nav__item--link:hover {
+    transform: scale(1.1);
+    animation: pulse 1s infinite;
+  }
+   
+  a {
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  /* search deo */
+  .nav input[type=text] {
+    padding: 6px;
+    background-color: #748CDB;
+    margin-top: 8px;
+    margin-right: 2px;
+    font-size: 17px;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+  }
+  
+  .nav input[type=text]:focus {
+    transition: transform 0.3s ease;
+    border-color: #163B88;
+    color: #fff;
+    border: 1px;
+  }
+
+  .logout-button {
+    margin-left: 50px;
+
+  }
+  
+  .logout-button, .dugmePretraga {
+    background-color: #243857;
+    margin-left: 5px;
+    color: white;
+    border: 1pc;
+    border-radius: 15%;
+    padding: 12px 15px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logout-button:hover, .dugmePretraga:hover {
+    background-color: #163B88;
+  }
