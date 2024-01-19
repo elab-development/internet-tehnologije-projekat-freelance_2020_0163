@@ -1,0 +1,47 @@
+.profile {
+    max-width: 100%;
+    background-image: url('https://wallpapers.com/images/hd/1920x1080-hd-coding-uxxijj0oa4s9xh25.jpg');
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    display: flex;
+    justify-content: center; 
+    align-items: center;  
+  }
+
+  h2 {
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+
+  .profile-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .profile-image {
+    width: 1200px;
+    height: 500px;
+    margin-right: 20px;
+    display: block;
+  }
+
+  .user-details {
+    padding: 20px; 
+    width: 96%;
+    margin: 16px 0;
+    border-radius: 8px;
+    background-color:#243857;
+    opacity: 85%;
+    color: azure;
+    font-weight: bold;
+  }
+
+  .user-details p {
+    margin-bottom: 10px;
+  }

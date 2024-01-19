@@ -1,6 +1,8 @@
 import React from 'react';
 import Footer from './Footer'; 
 
+import '../styles/Profile.css';
+
 import imageVasa from '../assets/user1.jpg';
 import imageMilica from '../assets/user2.jpg';
 
