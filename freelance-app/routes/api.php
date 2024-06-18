@@ -25,6 +25,8 @@ Route::get('ponudjacusluga/vratiSvePonudjaceUsluge/{id}', [PonudjacUslugaControl
 //pretraga ponudjaca po gradu
 Route::get('/search/ponudjaci', [PretragaController::class, 'searchPonudjaci']);
 
+//vraca sve kategorije koje postoje u bazi
+Route::get('kategorijeusluga', [UslugaController::class, 'sveKategorije']);
 //rute za koje treba autentifikacija
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
