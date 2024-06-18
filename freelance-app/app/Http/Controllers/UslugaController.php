@@ -76,43 +76,41 @@ class UslugaController extends Controller
     }
     
 
-
     public function update(Request $request, $id)
-{
-    $validator = Validator::make($request->all(), [
-        'naziv' => 'required',
-        'opis' => 'required',
-        'kategorija_usluge_id' => 'required|exists:kategorijeusluga,id',
-        'user_id' => 'required|exists:users,id',
-        // Dodaj ostale validacije za ažuriranje usluge
-    ]);
-
-    if ($validator->fails()) {
-        $errors = $validator->errors();
+    {
+        $validator = Validator::make($request->all(), [
+            'naziv' => 'required',
+            'opis' => 'required',
+            'kategorija_usluge_id' => 'required|exists:kategorijeusluga,id',
+            'user_id' => 'required|exists:users,id',
+        ]);
     
-        if ($errors->has('kategorija_usluge_id') && $errors->first('kategorija_usluge_id') === 'The selected kategorija usluge id is invalid.') {
-            return response()->json(['Data kategorija ne postoji!']);
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+        
+            if ($errors->has('kategorija_usluge_id') && $errors->first('kategorija_usluge_id') === 'The selected kategorija usluge id is invalid.') {
+                return response()->json(['Data kategorija ne postoji!']);
+            }
+        
+            if ($errors->has('user_id') && $errors->first('user_id') === 'The selected user id is invalid.') {
+                return response()->json(['Dati korisnik ne postoji!']);
+            }
+        
+            return response()->json($errors);
         }
     
-        if ($errors->has('user_id') && $errors->first('user_id') === 'The selected user id is invalid.') {
-            return response()->json(['Dati korisnik ne postoji!']);
-        }
+        $usluga = Usluga::findOrFail($id);
     
-        return response()->json($errors);
+        $usluga->naziv = $request->naziv;
+        $usluga->opis = $request->opis;
+        $usluga->kategorija_usluge_id = $request->kategorija_usluge_id;
+        $usluga->user_id = $request->user_id;
+    
+        $usluga->save();
+    
+        return new UslugaResource($usluga);
     }
-
-    $usluga = Usluga::findOrFail($id);
-
-    $usluga->naziv = $request->naziv;
-    $usluga->opis = $request->opis;
-    $usluga->kategorija_usluge_id = $request->kategorija_usluge_id;
-    $usluga->user_id = $request->user_id;
-    // Dodaj ažuriranje drugih polja usluge ako su prisutna
-
-    $usluga->save();
-
-    return response()->json(['Uspešno ažurirana usluga!', new UslugaResource($usluga)]);
-}
+    
 
 
     public function updateOpis(Request $request, $id)

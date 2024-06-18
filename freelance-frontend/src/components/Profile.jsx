@@ -8,12 +8,14 @@ function Profile() {
   const [userInfo, setUserInfo] = useState(null);
   const [userServices, setUserServices] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [currentServiceId, setCurrentServiceId] = useState(null);
   const { categories, loading, error } = useCategories();  
   const [newService, setNewService] = useState({
-    naziv: 'nova usluga',
-    opis: 'opis nove usluge',
-    cena: '100',
-    vremeRealizacijeUMesecima: '2',
+    naziv: '',
+    opis: '',
+    cena: '',
+    vremeRealizacijeUMesecima: '',
     kategorija_usluge_id: ''
   });
 
@@ -84,6 +86,46 @@ function Profile() {
     }
   };
 
+  const handleUpdateService = async (e) => {
+    e.preventDefault();
+    const token = sessionStorage.getItem('token');
+    try {
+      const response = await axios.put(`http://127.0.0.1:8000/api/usluge/${currentServiceId}`, {
+        ...newService,
+        user_id: userInfo.id_korisnika
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setUserServices(prevServices => prevServices.map(service => service.id_usluge === currentServiceId ? response.data.data : service));
+      setShowForm(false);
+      setIsUpdating(false);
+      setNewService({
+        naziv: '',
+        opis: '',
+        cena: '',
+        vremeRealizacijeUMesecima: '',
+        kategorija_usluge_id: ''
+      });
+    } catch (error) {
+      console.error('Error updating service:', error);
+    }
+  };
+
+  const handleEdit = (service) => {
+    setShowForm(true);
+    setIsUpdating(true);
+    setCurrentServiceId(service.id_usluge);
+    setNewService({
+      naziv: service.naziv_usluge,
+      opis: service.opis_usluge,
+      cena: service.cena,
+      vremeRealizacijeUMesecima: service.vreme_realizacije_u_mesecima,
+      kategorija_usluge_id: service.kategorija_usluge_id
+    });
+  };
+
   if (!userInfo) {
     return <div>Loading...</div>;
   }
@@ -126,6 +168,7 @@ function Profile() {
                     <td>{service.cena}</td>
                     <td>{service.vreme_realizacije_u_mesecima}</td>
                     <td>
+                      <button onClick={() => handleEdit(service)}>Ažuriraj</button>
                       <button onClick={() => handleDelete(service.id_usluge)}>Obriši</button>
                     </td>
                   </tr>
@@ -137,7 +180,7 @@ function Profile() {
             {showForm ? 'Zatvori' : 'Dodaj novu uslugu'}
           </button>
           {showForm && (
-            <form onSubmit={handleAddService} className="add-service-form">
+            <form onSubmit={isUpdating ? handleUpdateService : handleAddService} className="add-service-form">
               <input
                 type="text"
                 placeholder="Naziv usluge"
@@ -178,7 +221,7 @@ function Profile() {
                   </option>
                 ))}
               </select>
-              <button type="submit">Dodaj uslugu</button>
+              <button type="submit">{isUpdating ? 'Ažuriraj uslugu' : 'Dodaj uslugu'}</button>
             </form>
           )}
         </div>
