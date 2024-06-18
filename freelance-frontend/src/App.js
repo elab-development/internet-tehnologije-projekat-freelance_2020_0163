@@ -1,7 +1,7 @@
 import './App.css';
-import { BrowserRouter,Route,Routes, Navigate  } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import LoginForm from './components/LoginForm.jsx';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from './components/NavBar.jsx';
 import Home from './components/Home.jsx';
 import Services from './components/Services.jsx';
@@ -11,53 +11,52 @@ import Profile from './components/Profile.jsx';
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
 
-  //fja za login
-  const handleLogin = (username) => {
-    setLoggedInUser(username);
+  // fja za login
+  const handleLogin = (user) => {
+    setLoggedInUser(user);
   };
 
-  //fja za logout
+  // fja za logout
   const handleLogout = () => {
     setLoggedInUser(null);
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('token');
     return <Navigate to="/" />;
   };
 
-  //uslov po kom ce se vrsiti pretraga
-  const [uslovPretrage,setUslovPretrage]=useState("");
-
-
-  //funkcija koja setuje uslov pretrage
-  function pretrazi(uslovPretrage){
-    setUslovPretrage(uslovPretrage);
-  }
+  // Učitavanje korisnika iz session storage kada se komponenta montira
+  useEffect(() => {
+    const storedUser = sessionStorage.getItem('user');
+    if (storedUser) {
+      setLoggedInUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   return (
     <div className="App">
       <BrowserRouter>
-      {loggedInUser && <NavBar  pretrazi={pretrazi} loggedInUser={loggedInUser} handleLogout={handleLogout} />}
+        {loggedInUser && <NavBar loggedInUser={loggedInUser} handleLogout={handleLogout} />}
         <Routes>
           <Route
             path="/"
             element={loggedInUser ? <Navigate to="/home" /> : <LoginForm onLogin={handleLogin} />}
           />
-           <Route 
-            path="/home" 
-            element={<Home/>} 
+          <Route
+            path="/home"
+            element={<Home />}
           />
-            <Route 
-            path="/services" 
-            element={<Services  kriterijum={uslovPretrage} />} 
+          <Route
+            path="/services"
+            element={<Services />}
           />
-          <Route 
-            path="/about" 
-            element={<About/>} 
+          <Route
+            path="/about"
+            element={<About />}
           />
-            <Route
+          <Route
             path="/profile"
             element={loggedInUser ? <Profile loggedInUser={loggedInUser} /> : <Navigate to="/" />}
           />
-
-          
         </Routes>
       </BrowserRouter>
     </div>

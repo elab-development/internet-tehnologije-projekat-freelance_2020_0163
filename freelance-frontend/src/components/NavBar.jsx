@@ -4,9 +4,8 @@ import '../styles/NavBar.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function NavBar({ loggedInUser, handleLogout, pretrazi }) {
+function NavBar({ loggedInUser, handleLogout }) {
   const navigate = useNavigate();
- 
 
   const handleLogoutClick = async () => {
     const token = sessionStorage.getItem('token');
@@ -15,24 +14,18 @@ function NavBar({ loggedInUser, handleLogout, pretrazi }) {
         headers: {
           Authorization: `Bearer ${token}`  
         }
-      });  
-        
+      });
+
       // Brisanje sessionStorage
       sessionStorage.clear();
 
       // Pozivanje handleLogout i navigacija
       handleLogout();
       navigate('/');
-      localStorage.clear();
     } catch (error) {
       console.error('Error logging out:', error);
       alert('Došlo je do greške prilikom odjavljivanja. Pokušajte ponovo.');
     }
-
-
-     
-      
-    
   };
 
   return (
@@ -44,20 +37,6 @@ function NavBar({ loggedInUser, handleLogout, pretrazi }) {
         <ul className="nav__list">
           {loggedInUser ? (
             <>
-              <li className="nav__item nav__item--search">
-                <input
-                  type="text"
-                  id="kriterijum"
-                  placeholder="Pretrazi"
-                  name="search"
-                  onChange={() =>
-                    pretrazi(document.getElementById('kriterijum').value)
-                  }
-                />
-                <button type="submit" className="dugmePretraga">
-                  <BsSearch></BsSearch>
-                </button>
-              </li>
               <li className="nav__item nav__item--link">
                 <Link to="/profile">PROFILE</Link>
               </li>
@@ -71,7 +50,7 @@ function NavBar({ loggedInUser, handleLogout, pretrazi }) {
                 <Link to="/about">ABOUT</Link>
               </li>
               <li className="nav__item nav__item--user">
-                USER: {loggedInUser}{' '}
+                USER: {loggedInUser.name}{' '}
                 <button className="logout-button" onClick={handleLogoutClick}>
                   Logout
                 </button>

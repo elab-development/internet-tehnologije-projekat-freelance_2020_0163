@@ -1,34 +1,96 @@
 .services {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(600px, 1fr)); 
-    gap: 16px;
-    padding: 20px;
-   
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(600px, 1fr)); 
+  gap: 16px;
+  padding: 20px;
+}
 
-  .servicesStranica{
-    background-image: url('https://wallpapers.com/images/hd/1920x1080-hd-coding-uxxijj0oa4s9xh25.jpg');
-  }
-  
-  .pagination {
-    margin-top: 16px;
-    display: flex;
-    justify-content: center;
-    background: transparent;
-  }
-  
-  .pagination button {
-    margin: 0 4px;
-    padding: 8px 12px;
-    font-size: 14px;
-    cursor: pointer;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: #748cdb;
-  }
-  
-  .pagination button.active {
-    background-color: #748cdb;
-    color: #fff;
-    border: 1px solid #748cdb;
-  }
+.servicesStranica {
+  background-image: url('https://wallpapers.com/images/hd/1920x1080-hd-coding-uxxijj0oa4s9xh25.jpg');
+}
+
+.pagination {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  background: transparent;
+}
+
+.pagination button {
+  margin: 0 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #748cdb;
+}
+
+.pagination button.active {
+  background-color: #748cdb;
+  color: #fff;
+  border: 1px solid #748cdb;
+}
+
+.search-bar {
+  display: flex;
+  gap: 8px;
+  padding: 16px;
+  justify-content: center;
+}
+
+.search-bar input[type="text"] {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  width: 150px;
+}
+
+.service {
+  padding: 24px; 
+  margin: 16px 0;
+  border-radius: 8px;
+  background-color: #243857;
+  opacity: 85%;
+  color: azure;
+  font-weight: bold;
+}
+
+.service-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px; 
+}
+
+.service-text {
+  margin-bottom: 12px; 
+}
+
+.service-image {
+  width: 100%; 
+  max-height: 400px; 
+  object-fit: cover; 
+  border-radius: 8px;
+}
+
+.service-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.star-rating {
+  display: flex;
+  gap: 4px;
+}
+
+.star-filled,
+.star-empty {
+  cursor: pointer;
+  font-size: 24px;
+  color: #f8d613;
+}
+
+.star-empty {
+  color: #ddd;
+}

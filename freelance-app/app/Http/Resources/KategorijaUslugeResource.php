@@ -13,9 +13,9 @@ class KategorijaUslugeResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'ID kategorije kojoj usluga pripada' => $this->id,
-            'Naziv kategorije' => $this->naziv,
-            'Opis kategorije' => $this->opis,
+            'ID' => $this->id,
+            'Naziv_kategorije' => $this->naziv,
+            'Opis_kategorije' => $this->opis,
         ];
     }
 }

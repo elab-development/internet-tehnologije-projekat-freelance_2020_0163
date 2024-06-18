@@ -23,8 +23,7 @@ function Service({ id_usluge, naziv_usluge, opis_usluge, cena, vreme_realizacije
       <p className="service-text">Cena: {cena} EUR</p>
       <p className="service-text">Vreme realizacije u mesecima: {vreme_realizacije_u_mesecima}</p>
       {image && <img src={image} alt="Service" className="service-image" />}
-      <div className="service-text">Kategorija kojoj usluga pripada: {kategorija_kojoj_usluga_pripada.naziv_kategorije}</div>
-      <div className="service-text">Korisnik koji je odabrao datu uslugu: {korisnik_koji_je_odabrao_datu_uslugu.ime_korisnika}</div>
+      <div className="service-text">Kategorija kojoj usluga pripada: {kategorija_kojoj_usluga_pripada.Naziv_kategorije}</div>
       <div className="service-actions">
         <div className="star-rating">
           {[1, 2, 3, 4, 5].map((star) => (
