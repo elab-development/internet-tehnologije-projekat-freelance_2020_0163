@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -81,5 +82,9 @@ class AuthController extends Controller
     
         return response()->json(['message' => 'Nema autentifikovanog korisnika.'], 401);
     }
-    
+    //vraca ulogovanog usera
+    public function getUser(Request $request)
+    {
+        return new UserResource($request->user());
+    }
 }

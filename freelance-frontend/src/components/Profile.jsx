@@ -1,58 +1,89 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Footer from './Footer'; 
-
 import '../styles/Profile.css';
 
-import imageVasa from '../assets/user1.jpg';
-import imageMilica from '../assets/user2.jpg';
+function Profile() {
+  const [userInfo, setUserInfo] = useState(null);
+  const [userServices, setUserServices] = useState([]);
 
-function Profile({ loggedInUser }) {
-  //statican niz korisnika
-    const usersInfo = {
-      vasilije: {
-        username: 'Vasilije Milacic',
-        birthday: '10/05/2001',
-        phone: '064532662',
-        city: 'Belgrade',
-        image: imageVasa,
-        services: ['Izrada veb sajtova', 'Kreiranje logoa za brendove', 'Resavanje bagova u kodu'],
-      },
-      milica: {
-        username: 'Milica Milosavljevic',
-        birthday: '05/12/2001',
-        phone: '069443555',
-        city: 'Novi Sad',
-        image: imageMilica,
-        services: ['Pisanje raznih vrsta radova - seminarskih, naucnih', 'Izrada dijagrama za aplikacije'],
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      const token = sessionStorage.getItem('token');
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/user', {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setUserInfo(response.data.data);
+
+        // Fetching services for the logged-in user
+        const userId = response.data.data.id_korisnika;
+        const servicesResponse = await axios.get(`http://127.0.0.1:8000/api/usluge/korisnik/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setUserServices(servicesResponse.data);
+      } catch (error) {
+        console.error('Error fetching user info:', error);
       }
     };
-  
-    const userInfo = usersInfo[loggedInUser];
-  
-    if (!userInfo) {
-      return <div>User not found</div>;
-    }
-  
-    const { username, birthday, phone, city, image, services } = userInfo;
-  
-    return (
-      <div>
-        <div className="profile">
-          <div className="profile-info">
-            <h2>USER PROFILE</h2>
-            <img src={image} alt="Profile" className="profile-image" />
-            <div className="user-details">
-              <p>Username: {username}</p>
-              <p>Birthday: {birthday}</p>
-              <p>Phone: {phone}</p>
-              <p>City: {city}</p>
-              <p>Services: {services.join(', ')}</p>
-            </div>
+
+    fetchUserInfo();
+  }, []);
+
+  if (!userInfo) {
+    return <div>Loading...</div>;
+  }
+
+  const { id_korisnika, ime_korisnika, email_korisnika } = userInfo;
+
+  return (
+    <div>
+      <div className="profile">
+        <div className="profile-info">
+          <h2>USER PROFILE</h2>
+          <div className="user-details">
+            <p>ID: {id_korisnika}</p>
+            <p>Ime: {ime_korisnika}</p>
+            <p>Email: {email_korisnika}</p>
           </div>
         </div>
-        <Footer />
+        <div className="profile-services services-details">
+          <h2>USLUGE</h2>
+          {userServices.length === 0 ? (
+            <p className="no-services">Trenutno nemate nijednu uslugu.</p>
+          ) : (
+            <table>
+              <thead>
+                <tr>
+                  <th>ID Usluge</th>
+                  <th>Naziv Usluge</th>
+                  <th>Opis Usluge</th>
+                  <th>Cena</th>
+                  <th>Vreme Realizacije</th>
+                </tr>
+              </thead>
+              <tbody>
+                {userServices.map(service => (
+                  <tr key={service.id_usluge}>
+                    <td>{service.id_usluge}</td>
+                    <td>{service.naziv_usluge}</td>
+                    <td>{service.opis_usluge}</td>
+                    <td>{service.cena}</td>
+                    <td>{service.vreme_realizacije_u_mesecima}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
       </div>
-    );
-  }
-  
-  export default Profile;
+      <Footer />
+    </div>
+  );
+}
+
+export default Profile;

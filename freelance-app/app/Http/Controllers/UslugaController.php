@@ -31,8 +31,7 @@ class UslugaController extends Controller
     public function prikaziPoKorisniku($korisnik_id)
     {
         $usluge = Usluga::where('user_id', $korisnik_id)->get();
-        return response()->json(['Usluge datog korisnika su: ',
-         UslugaResource::collection($usluge)]);
+        return response()->json(UslugaResource::collection($usluge));
     }
 
 

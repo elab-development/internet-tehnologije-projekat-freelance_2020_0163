@@ -35,6 +35,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //export u excel
     Route::get('/export-excel', [PonudjacController::class, 'exportToExcel']);
+    Route::get('user', [AuthController::class, 'getUser']); //vraca ulogovanog usera
 
     Route::post('logout', [AuthController::class, 'logout']);
 });
+ 
