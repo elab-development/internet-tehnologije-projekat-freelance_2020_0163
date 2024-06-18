@@ -25,7 +25,7 @@ function Profile() {
             Authorization: `Bearer ${token}`
           }
         });
-        setUserServices(servicesResponse.data);
+        setUserServices(servicesResponse.data);  
       } catch (error) {
         console.error('Error fetching user info:', error);
       }
@@ -33,6 +33,20 @@ function Profile() {
 
     fetchUserInfo();
   }, []);
+
+  const handleDelete = async (serviceId) => {
+    const token = sessionStorage.getItem('token');
+    try {
+      await axios.delete(`http://127.0.0.1:8000/api/usluge/${serviceId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setUserServices(prevServices => prevServices.filter(service => service.id_usluge !== serviceId));
+    } catch (error) {
+      console.error('Error deleting service:', error);
+    }
+  };
 
   if (!userInfo) {
     return <div>Loading...</div>;
@@ -64,6 +78,7 @@ function Profile() {
                   <th>Opis Usluge</th>
                   <th>Cena</th>
                   <th>Vreme Realizacije</th>
+                  <th>Akcije</th>
                 </tr>
               </thead>
               <tbody>
@@ -74,6 +89,9 @@ function Profile() {
                     <td>{service.opis_usluge}</td>
                     <td>{service.cena}</td>
                     <td>{service.vreme_realizacije_u_mesecima}</td>
+                    <td>
+                      <button onClick={() => handleDelete(service.id_usluge)}>Obriši</button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
