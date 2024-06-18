@@ -70,9 +70,16 @@ class AuthController extends Controller
     }
 
     //logout
-    public function logout()
+    public function logout(Request $request)
     {
-        auth()->user()->tokens()->delete();
-        return response()->json('Uspesan logout korisnika.');
+        $user = $request->user(); // Dobavljanje trenutnog autentifikovanog korisnika
+    
+        if ($user) {
+            $user->tokens()->delete(); // Brisanje svih tokena korisnika
+            return response()->json(['message' => 'Uspesan logout korisnika.']);
+        }
+    
+        return response()->json(['message' => 'Nema autentifikovanog korisnika.'], 401);
     }
+    
 }

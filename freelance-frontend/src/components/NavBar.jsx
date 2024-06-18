@@ -2,16 +2,38 @@ import { Link } from 'react-router-dom';
 import { BsSearch } from 'react-icons/bs';
 import '../styles/NavBar.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function NavBar({ loggedInUser, handleLogout, pretrazi }) {
+  const navigate = useNavigate();
+ 
 
-    const navigate = useNavigate();
+  const handleLogoutClick = async () => {
+    const token = sessionStorage.getItem('token');
+    try {
+      await axios.post('http://127.0.0.1:8000/api/logout', null, {
+        headers: {
+          Authorization: `Bearer ${token}`  
+        }
+      });  
+        
+      // Brisanje sessionStorage
+      sessionStorage.clear();
 
-  const handleLogoutClick = () => {
-    handleLogout();
-    navigate('/');
+      // Pozivanje handleLogout i navigacija
+      handleLogout();
+      navigate('/');
+      localStorage.clear();
+    } catch (error) {
+      console.error('Error logging out:', error);
+      alert('Došlo je do greške prilikom odjavljivanja. Pokušajte ponovo.');
+    }
+
+
+     
+      
+    
   };
-
 
   return (
     <div>
@@ -23,21 +45,30 @@ function NavBar({ loggedInUser, handleLogout, pretrazi }) {
           {loggedInUser ? (
             <>
               <li className="nav__item nav__item--search">
-                <input type="text" id="kriterijum" placeholder="Pretrazi" 
-                       name="search" onChange={()=>pretrazi(document.getElementById('kriterijum').value)}/>
-                <button type="submit" className='dugmePretraga'  ><BsSearch></BsSearch></button>
+                <input
+                  type="text"
+                  id="kriterijum"
+                  placeholder="Pretrazi"
+                  name="search"
+                  onChange={() =>
+                    pretrazi(document.getElementById('kriterijum').value)
+                  }
+                />
+                <button type="submit" className="dugmePretraga">
+                  <BsSearch></BsSearch>
+                </button>
               </li>
               <li className="nav__item nav__item--link">
-                <Link to='/profile'> PROFILE </Link>
+                <Link to="/profile">PROFILE</Link>
               </li>
               <li className="nav__item nav__item--link">
-                <Link to='/home'>HOME </Link>
+                <Link to="/home">HOME</Link>
               </li>
               <li className="nav__item nav__item--link">
-                <Link to='/services'>SERVICES</Link>
+                <Link to="/services">SERVICES</Link>
               </li>
               <li className="nav__item nav__item--link">
-                <Link to='/about'>ABOUT </Link>
+                <Link to="/about">ABOUT</Link>
               </li>
               <li className="nav__item nav__item--user">
                 USER: {loggedInUser}{' '}
@@ -55,7 +86,6 @@ function NavBar({ loggedInUser, handleLogout, pretrazi }) {
       </nav>
     </div>
   );
-
 }
 
-  export default NavBar;
+export default NavBar;
