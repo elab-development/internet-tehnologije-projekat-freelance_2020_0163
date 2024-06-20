@@ -17,6 +17,35 @@ function Services() {
     kategorija: '',
     korisnik: ''
   });
+  const [selectedCurrency, setSelectedCurrency] = useState('USD');
+  const [exchangeRates, setExchangeRates] = useState({});
+  const [currencyOptions, setCurrencyOptions] = useState([]);
+
+  // Fetch exchange rates and available currencies from API
+  useEffect(() => {
+    fetch(`https://api.exchangerate-api.com/v4/latest/USD`)
+      .then(response => response.json())
+      .then(data => {
+        setExchangeRates(data.rates);
+        setCurrencyOptions(Object.keys(data.rates));
+      })
+      .catch(error => console.error('Error fetching exchange rates:', error));
+  }, []);
+
+  useEffect(() => {
+    if (selectedCurrency !== 'USD') {
+      fetch(`https://api.exchangerate-api.com/v4/latest/${selectedCurrency}`)
+        .then(response => response.json())
+        .then(data => setExchangeRates(data.rates))
+        .catch(error => console.error('Error fetching exchange rates:', error));
+    }
+  }, [selectedCurrency]);
+
+  // Update prices based on selected currency
+  const convertPrice = (priceInEUR) => {
+    const rate = exchangeRates['EUR'] || 1; // Default to 1 if no rate is found
+    return (priceInEUR * rate).toFixed(2);
+  };
 
   // Funkcija za update zvezdica
   const updateStars = (serviceId, starCount) => {
@@ -64,6 +93,10 @@ function Services() {
     }));
   };
 
+  const handleCurrencyChange = (e) => {
+    setSelectedCurrency(e.target.value);
+  };
+
   return (
     <div className='servicesStranica'>
       <div className="search-bar">
@@ -103,6 +136,14 @@ function Services() {
           onChange={handleInputChange}
         /> 
       </div>
+      <div className="currency-selector">
+        <label htmlFor="currency">Izaberi valutu: </label>
+        <select id="currency" value={selectedCurrency} onChange={handleCurrencyChange}>
+          {currencyOptions.map(currency => (
+            <option key={currency} value={currency}>{currency}</option>
+          ))}
+        </select>
+      </div>
       <div className="services">
         {displayServices.map((service, index) => (
           <Service
@@ -110,13 +151,14 @@ function Services() {
             id_usluge={service.id_usluge}
             naziv_usluge={service.naziv_usluge}
             opis_usluge={service.opis_usluge}
-            cena={service.cena}
+            cena={convertPrice(service.cena)}
             vreme_realizacije_u_mesecima={service.vreme_realizacije_u_mesecima}
             kategorija_kojoj_usluga_pripada={service.kategorija_kojoj_usluga_pripada}
             korisnik_koji_je_odabrao_datu_uslugu={service.korisnik_koji_je_odabrao_datu_uslugu}
             image={service.image}
             stars={service.stars}
             updateStars={updateStars} 
+            selectedCurrency={selectedCurrency} // Prosledjujemo i odabranu valutu
           />
         ))}
       </div>

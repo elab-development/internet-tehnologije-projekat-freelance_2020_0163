@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Service.css';
 
-function Service({ id_usluge, naziv_usluge, opis_usluge, cena, vreme_realizacije_u_mesecima, kategorija_kojoj_usluga_pripada, korisnik_koji_je_odabrao_datu_uslugu, image, stars: initialStars, updateStars }) {
+function Service({ id_usluge, naziv_usluge, opis_usluge, cena, vreme_realizacije_u_mesecima, kategorija_kojoj_usluga_pripada, korisnik_koji_je_odabrao_datu_uslugu, image, stars: initialStars, updateStars,selectedCurrency }) {
   const [stars, setStars] = useState(initialStars || 0);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function Service({ id_usluge, naziv_usluge, opis_usluge, cena, vreme_realizacije
         <p>Naziv usluge: {naziv_usluge}</p>
       </div>
       <p className="service-text">Opis usluge: {opis_usluge}</p>
-      <p className="service-text">Cena: {cena} EUR</p>
+      <p className="service-text">Cena: {cena} {selectedCurrency}</p>
       <p className="service-text">Vreme realizacije u mesecima: {vreme_realizacije_u_mesecima}</p>
       {image && <img src={image} alt="Service" className="service-image" />}
       <div className="service-text">Kategorija kojoj usluga pripada: {kategorija_kojoj_usluga_pripada.Naziv_kategorije}</div>
