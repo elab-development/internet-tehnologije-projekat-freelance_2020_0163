@@ -7,6 +7,7 @@ import Home from './components/Home.jsx';
 import Services from './components/Services.jsx';
 import About from './components/About.jsx';
 import Profile from './components/Profile.jsx';
+import Admin from './components/Admin.js';
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -52,6 +53,10 @@ function App() {
           <Route
             path="/about"
             element={<About />}
+          />
+           <Route
+            path="/admin"
+            element={<Admin />}
           />
           <Route
             path="/profile"

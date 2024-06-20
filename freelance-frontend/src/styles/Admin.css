@@ -1,0 +1,56 @@
+.admin-container {
+    max-width: 100%;
+    margin: 0 auto;
+    height: auto;
+    padding: 20px;
+    text-align: center;
+    background-image: url(https://www.computersciencedegreehub.com/wp-content/uploads/2023/02/shutterstock_535124956-scaled.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .admin-title {
+    font-size: 32px;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  
+  .admin-table {
+    width: 80%;
+    max-width: 1200px;
+    border-collapse: collapse;
+    background-color: #3498db;
+    opacity: 88%;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .admin-table th, .admin-table td {
+    padding: 12px 15px;
+    text-align: left;
+    color: #fff;
+  }
+  
+  .admin-table th {
+    background-color: #192D45;
+  }
+  
+  .admin-table tr:nth-child(even) {
+    background-color: #7990A3;
+  }
+  
+  .admin-table tr:hover {
+    background-color: #192D45;
+  }
+  
+  @media (max-width: 768px) {
+    .admin-table th, .admin-table td {
+      padding: 8px 10px;
+    }
+  }
+  
