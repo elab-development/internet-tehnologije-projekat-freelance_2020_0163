@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/LoginForm.css';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = ({ onLogin }) => {
   const [isLogin, setIsLogin] = useState(true);
-  const [username, setUsername] = useState('schowalter.ada@example.com');
+  const [username, setUsername] = useState('roberto.hartmann@example.org');
   const [password, setPassword] = useState('password');
   const [name, setName] = useState('');
-
+  let navigate = useNavigate();
   // fja za obradu funkcije logina
   const handleLogin = async () => {
     try {
@@ -23,7 +24,11 @@ const LoginForm = ({ onLogin }) => {
         // Čuvanje korisnika i tokena u session storage
         sessionStorage.setItem('user', JSON.stringify(user));
         sessionStorage.setItem('token', token);
-
+        if(user.admin==0){
+          navigate("/admin")
+        }else{
+          navigate("/services")
+        }
         onLogin(username);
         alert('Uspešno ste se prijavili!');
       } else {
