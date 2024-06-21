@@ -24,8 +24,9 @@ const LoginForm = ({ onLogin }) => {
         // Čuvanje korisnika i tokena u session storage
         sessionStorage.setItem('user', JSON.stringify(user));
         sessionStorage.setItem('token', token);
-        if(user.admin==0){
+        if(user.admin==1){
           navigate("/admin")
+          
         }else{
           navigate("/services")
         }
@@ -56,7 +57,12 @@ const LoginForm = ({ onLogin }) => {
         // Čuvanje korisnika i tokena u session storage
         sessionStorage.setItem('user', JSON.stringify(user));
         sessionStorage.setItem('token', token);
-
+        if(user.admin==1){
+          navigate("/admin")
+          
+        }else{
+          navigate("/services")
+        }
         onLogin(username);
         alert('Uspešno ste se registrovali!');
       } else {
