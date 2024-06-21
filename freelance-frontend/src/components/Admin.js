@@ -5,14 +5,13 @@ import '../styles/Admin.css';
 function Admin() {
   const [ponudjaci, setPonudjaci] = useState([]);
   const [search, setSearch] = useState({
-  
     imePrezime: '',
     grad: '',
     adresa: '',
     email: '',
-    telefon: '',
-    
+    telefon: ''
   });
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'ascending' });
 
   useEffect(() => {
     axios.get('http://127.0.0.1:8000/api/ponudjaci')
@@ -30,15 +29,40 @@ function Admin() {
 
   const filteredPonudjaci = ponudjaci.filter(ponudjac => {
     return (
-      
       ponudjac.Ime_i_prezime_ponudjaca.toLowerCase().includes(search.imePrezime.toLowerCase()) &&
       ponudjac.Grad_iz_koga_je_ponudjac.toLowerCase().includes(search.grad.toLowerCase()) &&
       ponudjac.Adresa_ponudjaca.toLowerCase().includes(search.adresa.toLowerCase()) &&
       ponudjac.Email_ponudjaca.toLowerCase().includes(search.email.toLowerCase()) &&
-      ponudjac.Kontakt_telefon_ponudjaca.toLowerCase().includes(search.telefon.toLowerCase())  
-    
+      ponudjac.Kontakt_telefon_ponudjaca.toLowerCase().includes(search.telefon.toLowerCase())
     );
   });
+
+  const sortedPonudjaci = [...filteredPonudjaci].sort((a, b) => {
+    if (sortConfig.key) {
+      if (a[sortConfig.key] < b[sortConfig.key]) {
+        return sortConfig.direction === 'ascending' ? -1 : 1;
+      }
+      if (a[sortConfig.key] > b[sortConfig.key]) {
+        return sortConfig.direction === 'ascending' ? 1 : -1;
+      }
+    }
+    return 0;
+  });
+
+  const requestSort = (key) => {
+    let direction = 'ascending';
+    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const getSortDirection = (key) => {
+    if (sortConfig.key === key) {
+      return sortConfig.direction === 'ascending' ? '↑' : '↓';
+    }
+    return '';
+  };
 
   return (
     <div className="admin-container">
@@ -83,18 +107,18 @@ function Admin() {
       <table className="admin-table">
         <thead>
           <tr>
-            <th>ID Ponudjaca</th>
-            <th>Ime i prezime ponudjaca</th>
-            <th>Grad iz koga je ponudjac</th>
-            <th>Adresa ponudjaca</th>
-            <th>Email ponudjaca</th>
-            <th>Kontakt telefon ponudjaca</th>
-            <th>Godine iskustva ponudjaca</th>
-            <th>Strucna sprema ponudjaca</th>
+            <th onClick={() => requestSort('ID_Ponudjaca')}>ID Ponudjaca {getSortDirection('ID_Ponudjaca')}</th>
+            <th onClick={() => requestSort('Ime_i_prezime_ponudjaca')}>Ime i prezime ponudjaca {getSortDirection('Ime_i_prezime_ponudjaca')}</th>
+            <th onClick={() => requestSort('Grad_iz_koga_je_ponudjac')}>Grad iz koga je ponudjac {getSortDirection('Grad_iz_koga_je_ponudjac')}</th>
+            <th onClick={() => requestSort('Adresa_ponudjaca')}>Adresa ponudjaca {getSortDirection('Adresa_ponudjaca')}</th>
+            <th onClick={() => requestSort('Email_ponudjaca')}>Email ponudjaca {getSortDirection('Email_ponudjaca')}</th>
+            <th onClick={() => requestSort('Kontakt_telefon_ponudjaca')}>Kontakt telefon ponudjaca {getSortDirection('Kontakt_telefon_ponudjaca')}</th>
+            <th onClick={() => requestSort('Godine_iskustva_ponudjaca')}>Godine iskustva ponudjaca {getSortDirection('Godine_iskustva_ponudjaca')}</th>
+            <th onClick={() => requestSort('Strucna_sprema_ponudjaca')}>Strucna sprema ponudjaca {getSortDirection('Strucna_sprema_ponudjaca')}</th>
           </tr>
         </thead>
         <tbody>
-          {filteredPonudjaci.map((ponudjac) => (
+          {sortedPonudjaci.map((ponudjac) => (
             <tr key={ponudjac.ID_Ponudjaca}>
               <td>{ponudjac.ID_Ponudjaca}</td>
               <td>{ponudjac.Ime_i_prezime_ponudjaca}</td>
