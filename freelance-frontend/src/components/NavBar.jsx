@@ -49,8 +49,8 @@ function NavBar({ loggedInUser, handleLogout }) {
               <li className="nav__item nav__item--link">
                 <Link to="/about">ABOUT</Link>
               </li>
-              <li className="nav__item nav__item--user">WW
-                USER: {loggedInUser}{' '}
+              <li className="nav__item nav__item--user"> 
+                USER: {loggedInUser.username}{' '}
                 <button className="logout-button" onClick={handleLogoutClick}>
                   Logout
                 </button>
